@@ -1,10 +1,10 @@
 #! /bin/sh
 
 # This script is inspired by and derived from https://www.debian.org/mirror/anonftpsync
-# & https://github.com/ZJU-NewMirrors/OldMirrorsScripts/blob/master/bin/simplersync
+# & https://github.com/ZJU-NewMirrors/OldMirrorsScripts/blob/master/bin/simplersync.
 # Note: You MUST have rsync 2.6.4 or newer, which is available in sarge
 #
-# Copyright (C) 2016 Stawidy <duyizhaozj321@yahoo>
+# Copyright (C) 2016 Stawidy <duyizhaozj321@yahoo.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
