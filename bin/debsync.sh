@@ -185,7 +185,5 @@ if [ -n "$MAILTO" ]; then
 	mutt -F ${HOME}/scripts/etc/muttrc.conf -s "Sync log for $MIRROR on $LOCAL_DATE" $MAILTO < $LOGFILE
 fi
 
-rm $LOCK
-
 # All done, clean
 rm $LOCK
