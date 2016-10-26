@@ -128,10 +128,11 @@ date +['Start '%F' '%T] >> $LOGFILE
 # Now start sync
 rsync --recursive --links --hard-links --times \
 	    --verbose \
-	    --delay-updates --delete-after \
+	    --delay-updates \
+	    --delete-after \
 	    --timeout=3600 \
-			--delete-excluded \
-			--force \
+        --delete-excluded \
+        --force \
 	    --exclude "$MIRROR-Archive-Update-in-Progress-${HOSTNAME}" \
 	    $TMP_EXCLUDE $EXCLUDE \
 	    "$RSYNC_HOST/$RSYNC_DIR/" "$TO/" >> $LOGFILE 2>&1
@@ -143,6 +144,7 @@ then
 else
 	echo "ERROR: Help, something weird happened" >> $LOGFILE
 	echo "mirroring exited with exitcode $result" >> $LOGFILE
+	date +['Failed '%F' '%T] >> $LOGFILE
 fi
 
 # It will work if you set up mutt client correctly
@@ -151,4 +153,4 @@ if [ -n "$MAILTO" ]; then
 fi
 
 # All done, clean
-rm $LOCK
+rm -f $LOCK

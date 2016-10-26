@@ -162,10 +162,11 @@ if [ "$result" = 0 ]; then
 	# Now sync the remaining stuff
 	rsync --recursive --links --hard-links --times \
 	     --verbose \
-	     --delay-updates --delete-after \
+	     --delay-updates \
+	     --delete-after \
 	     --timeout=3600 \
-			 --delete-excluded \
-			 --force \
+         --delete-excluded \
+         --force \
 	     --exclude "$MIRROR-Archive-Update-in-Progress-${HOSTNAME}" \
 	     --exclude "project/trace/${HOSTNAME}" \
 	     $TMP_EXCLUDE $EXCLUDE $SOURCE_EXCLUDE \
@@ -175,9 +176,11 @@ if [ "$result" = 0 ]; then
 	echo "Used debsync version: ${VERSION}" >> "${TO}/project/trace/${HOSTNAME}"
 	echo "Upstream-mirror: ${RSYNC_HOST}" >> "${TO}/project/trace/${HOSTNAME}"
 	echo "Revision: i18n inRelease AUIP" >> "${TO}/project/trace/${HOSTNAME}"
+	date +['Succeed '%F' '%T] >> $LOGFILE
 else
 	echo "ERROR: Help, something weird happened" >> $LOGFILE
 	echo "mirroring /pool exited with exitcode $result" >> $LOGFILE
+	date +['Failed '%F' '%T] >> $LOGFILE
 fi
 
 # It will work if you set up mutt client correctly
@@ -186,4 +189,4 @@ if [ -n "$MAILTO" ]; then
 fi
 
 # All done, clean
-rm $LOCK
+rm -f $LOCK
